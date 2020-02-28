@@ -1,0 +1,25 @@
+import pandas as pd
+mydataset = pd.read_csv('realestate.csv')
+X = mydataset.iloc[:,2:3].values
+Y = mydataset.iloc[:,4:5].values
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+X_mean = np.mean(X)
+Y_mean = np.mean(Y)
+m = 0
+c = 0
+L= 0.0001
+epochs = 1000
+n = float(len(X))
+for i in range(len(X)):
+Y_pred= m*X+c
+D_m= (-2/ n)* sum (X * (Y- Y_pred))
+D_c =(-2/n)* sum (Y - Y_pred)
+m= m- L*D_m
+c = c - L*D_c
+print (m , c) 
+Y_pred = m*X + c
+plt.scatter(X,Y)
+plt.scatter(X,Y_pred)
+plt.show()
